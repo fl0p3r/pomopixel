@@ -916,6 +916,7 @@ qrc_resources.cpp: ../src/resources.qrc \
 		/usr/lib/qt6/rcc \
 		../src/Main.qml \
 		../src/PixelButton.qml \
+		../src/MascotSprites.js \
 		../src/Mascot.qml \
 		../src/PixelProgressBar.qml \
 		../assets/click.wav \

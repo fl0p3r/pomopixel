@@ -2,6 +2,7 @@
     <qresource prefix="/">
         <file>Main.qml</file>
         <file>Mascot.qml</file>
+        <file>MascotSprites.js</file>
         <file>PixelButton.qml</file>
         <file>PixelProgressBar.qml</file>
         <file alias="fonts/PressStart2P.ttf">../assets/PressStart2P.ttf</file>

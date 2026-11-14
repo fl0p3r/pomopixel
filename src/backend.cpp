@@ -232,12 +232,25 @@ void Backend::playAudio(const QString &type) {
     }
 
     if (!soundPath.isEmpty() && QFileInfo::exists(soundPath)) {
-        // Play detached with pw-play or paplay
+        qreal vol = m_config ? m_config->volume() : 0.8;
+        vol = qBound(0.0, vol, 1.0);
+
         QString player = QStandardPaths::findExecutable("pw-play");
-        if (player.isEmpty())
-            player = QStandardPaths::findExecutable("paplay");
         if (!player.isEmpty()) {
-            QProcess::startDetached(player, { soundPath });
+            QProcess::startDetached(player, {
+                "--volume",
+                QString::number(vol, 'f', 2),
+                soundPath
+            });
+        } else {
+            player = QStandardPaths::findExecutable("paplay");
+            if (!player.isEmpty()) {
+                int paVol = static_cast<int>(vol * 65536);
+                QProcess::startDetached(player, {
+                    QString("--volume=%1").arg(paVol),
+                    soundPath
+                });
+            }
         }
     }
 }
