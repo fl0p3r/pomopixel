@@ -12,7 +12,7 @@
 </p>
 
 <p align="center">
-  <img src="preview.png" alt="Pomopixel running live on Omarchy with Gruvbox theme" width="560">
+  <img src="assets/screenshot.png" alt="Pomopixel running live on Omarchy with Gruvbox theme" width="560">
 </p>
 
 </div>
@@ -49,7 +49,7 @@ It functions both as a **standalone desktop application** (launched via `Super +
 Install directly via the Omarchy plugin manager:
 
 ```bash
-omarchy plugin add https://github.com/floper/pomopixel --enable
+omarchy plugin add https://github.com/fl0p3r/pomopixel --enable
 ```
 
 To update to the latest release:
@@ -77,7 +77,7 @@ sudo pacman -S --needed base-devel qt6-base qt6-declarative qt6-quickcontrols2 q
 
 Clone and install:
 ```bash
-git clone https://github.com/floper/pomopixel.git
+git clone https://github.com/fl0p3r/pomopixel.git
 cd pomopixel
 ./bin/build
 ./bin/install
@@ -93,7 +93,7 @@ sudo dnf install gcc-c++ make qt6-qtbase-devel qt6-qtdeclarative-devel qt6-qtqui
 
 Clone and build:
 ```bash
-git clone https://github.com/floper/pomopixel.git
+git clone https://github.com/fl0p3r/pomopixel.git
 cd pomopixel
 ./bin/build
 ./bin/install
@@ -109,7 +109,7 @@ sudo apt install build-essential qt6-base-dev qt6-declarative-dev qml6-module-qt
 
 Clone and build:
 ```bash
-git clone https://github.com/floper/pomopixel.git
+git clone https://github.com/fl0p3r/pomopixel.git
 cd pomopixel
 ./bin/build
 ./bin/install

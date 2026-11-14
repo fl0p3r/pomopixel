@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "author": "floper",
   "license": "MIT",
-  "homepage": "https://github.com/floper/pomopixel",
+  "homepage": "https://github.com/fl0p3r/pomopixel",
   "description": "Retro pixel-art Pomodoro timer for Omarchy with live theme synchronization and 32x32 animated mascots.",
   "kinds": [
     "bar-widget"
