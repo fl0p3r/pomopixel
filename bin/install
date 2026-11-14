@@ -1,0 +1,25 @@
+#!/bin/sh
+set -eu
+
+ROOT="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)"
+"$ROOT/bin/build"
+
+# Install locally to ~/.local (no sudo required, instant launcher update)
+mkdir -p "$HOME/.local/bin"
+mkdir -p "$HOME/.local/share/applications"
+mkdir -p "$HOME/.local/share/icons/hicolor/scalable/apps"
+mkdir -p "$HOME/.local/share/pomopixel/sounds"
+
+install -m755 "$ROOT/build/pomopixel" "$HOME/.local/bin/pomopixel"
+install -m644 "$ROOT/pkgbuild/pomopixel.desktop" "$HOME/.local/share/applications/pomopixel.desktop"
+install -m644 "$ROOT/pkgbuild/pomopixel.svg" "$HOME/.local/share/icons/hicolor/scalable/apps/pomopixel.svg"
+install -m644 "$ROOT/assets/"*.wav "$HOME/.local/share/pomopixel/sounds/"
+
+update-desktop-database "$HOME/.local/share/applications" 2>/dev/null || true
+
+echo "=========================================================="
+echo "✓ Pomopixel installed successfully!"
+echo "✓ Binary: $HOME/.local/bin/pomopixel"
+echo "✓ Desktop entry: $HOME/.local/share/applications/pomopixel.desktop"
+echo "✓ Press Super + Space and type 'pomopixel' or 'pomodoro' to launch!"
+echo "=========================================================="

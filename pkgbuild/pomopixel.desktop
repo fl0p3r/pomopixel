@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Pomopixel
+GenericName=Pomodoro Timer
+Comment=Retro pixel art Pomodoro timer following Omarchy theme
+Exec=pomopixel
+Icon=pomopixel
+Terminal=false
+Categories=Utility;Clock;
+Keywords=pomodoro;timer;pomo;pixel;focus;таймер;помодоро;
+StartupWMClass=pomopixel

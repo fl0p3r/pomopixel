@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Main.qml</file>
+        <file>Mascot.qml</file>
+        <file>PixelButton.qml</file>
+        <file>PixelProgressBar.qml</file>
+        <file alias="fonts/PressStart2P.ttf">../assets/PressStart2P.ttf</file>
+        <file alias="icons/pomopixel.svg">../assets/pomopixel.svg</file>
+        <file alias="sounds/finish.wav">../assets/finish.wav</file>
+        <file alias="sounds/start.wav">../assets/start.wav</file>
+        <file alias="sounds/click.wav">../assets/click.wav</file>
+    </qresource>
+</RCC>
