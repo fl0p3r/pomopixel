@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "pomopixel",
+  "name": "Pomopixel",
+  "version": "1.0.0",
+  "author": "floper",
+  "license": "MIT",
+  "homepage": "https://github.com/floper/pomopixel",
+  "description": "Retro pixel-art Pomodoro timer for Omarchy with live theme synchronization and 32x32 animated mascots.",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "plugin/BarWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "Pomopixel",
+    "description": "Status bar widget and quick launcher for the Pomopixel Pomodoro timer.",
+    "category": "Productivity",
+    "allowMultiple": false,
+    "defaultSection": "right"
+  }
+}
