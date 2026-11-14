@@ -1,13 +1,46 @@
-# 🍅 Pomopixel — Документация по конфигурации
+# Pomopixel
 
-Файл конфигурации расположен по пути:
-`~/.config/pomopixel/config.json`
+**A retro pixel-art Pomodoro timer designed natively for Omarchy and Wayland.**
 
-Изменения в `config.json` применяются **на лету** без необходимости перезапуска приложения!
+![Pomopixel](assets/screenshot.png)
+
+Pomopixel combines classic 8-bit arcade aesthetics with a distraction-free productivity timer. Built in C++17 and Qt 6 Quick, it runs as a lightweight, floating Wayland window that tracks your Omarchy system theme live.
 
 ---
 
-## Пример полной конфигурации
+## Features
+
+- **Live Omarchy Theme Sync**: Watches `~/.local/state/omarchy/current/theme/colors.toml` and Hyprland's rounding live. Switching your system theme instantly updates the app's palette without restarting.
+- **32×32 Pixel Mascots**: Animated pixel companions that keep you company during work and sleep peacefully during breaks:
+  - **Claude Critter**: The iconic orange pixel creature with walking and sleeping animations.
+  - **Dumpling Blob**: The cozy pink tamagotchi with sleepy closed eyes and blushing cheeks.
+  - **Linux Tux**: Classic retro penguin typing on a mini glowing laptop during focus sessions.
+  - **Arcade Ghost**: Pac-Man style ghost that looks around during focus and turns vulnerable blue when resting.
+- **Warm 8-Bit Audio**: Synthesized gentle chiptune chimes (triangle/sine waves with smooth attack/decay) with full volume control and support for custom audio files.
+- **Desktop Notifications**: Dispatches native notifications via `notify-send` when focus or break intervals complete.
+- **Keyboard-First Control**: Drive the entire timer from your keyboard without touching the mouse.
+- **Zero Overhead**: Compiled into a single, compact C++ binary using minimal system memory.
+
+---
+
+## Keyboard Shortcuts
+
+| Shortcut | Action |
+|---|---|
+| <kbd>Space</kbd> | Start / Pause timer |
+| <kbd>R</kbd> | Reset current session |
+| <kbd>S</kbd> | Skip to next phase |
+| <kbd>1</kbd> | Switch to **Focus** mode |
+| <kbd>2</kbd> | Switch to **Short Break** mode |
+| <kbd>3</kbd> | Switch to **Long Break** mode |
+| <kbd>M</kbd> | Cycle through mascots |
+| <kbd>Q</kbd> / <kbd>Esc</kbd> | Close window |
+
+---
+
+## Configuration
+
+Settings are stored in `~/.config/pomopixel/config.json` and reload **live on save**:
 
 ```json
 {
@@ -20,7 +53,7 @@
     "mascot": "claude_critter",
     "sound": {
         "enabled": true,
-        "volume": 0.8,
+        "volume": 0.2,
         "finish_sound": "",
         "start_sound": "",
         "click_sound": ""
@@ -42,75 +75,56 @@
 }
 ```
 
----
+### Options
 
-## Подробное описание параметров
-
-### ⏱️ `durations` (Длительности таймеров)
-* `focus` *(число, мин)*: Длительность сессии работы / концентрации (по умолчанию `25`).
-* `short_break` *(число, мин)*: Короткий перерыв между сессиями (по умолчанию `5`).
-* `long_break` *(число, мин)*: Длинный перерыв (по умолчанию `15`).
-* `long_break_interval` *(число)*: Количество завершенных сессий фокуса перед длинным перерывом (по умолчанию `4`).
+- **`durations`**: Minutes for `focus`, `short_break`, `long_break`, and cycles before a long break.
+- **`mascot`**: Active mascot (`"claude_critter"`, `"blob"`, `"tux"`, `"ghost"`).
+- **`sound.volume`**: Output volume between `0.0` and `1.0`.
+- **`sound.*_sound`**: Custom sound path (`.wav`, `.mp3`) or empty string for built-in chiptune.
+- **`theme.custom_accent`**: Override the Omarchy accent color with a custom hex code (e.g. `"#FF79C6"`).
 
 ---
 
-### 👾 `mascot` (Выбор маскота)
-Задает активного пиксельного персонажа. Можно переключать кликом по маскоту или клавишей `M`.
-* `"claude_critter"`: Официальный рыжий пиксельный зверёк Claude (ходит в фокусе, спит с Zzz на отдыхе).
-* `"blob"`: Розовый сонный слайм/тамагочи из оригинального референса.
-* `"tux"`: Пингвин Linux (печатает на ноутбуке в фокусе, отдыхает на перерыве).
-* `"ghost"`: Ретро-призрак из Pac-Man (озирается в фокусе, синеет и засыпает на отдыхе).
+## Building and Testing
+
+### Prerequisites
+
+On Arch Linux / Omarchy:
+
+```bash
+omarchy pkg add base-devel qt6-base qt6-declarative qt6-quickcontrols2 qt6-wayland pipewire
+```
+
+### Build
+
+```bash
+./bin/build
+```
+
+### Test
+
+Runs the offscreen Qt test suite:
+
+```bash
+./bin/test
+```
+
+### Install
+
+Installs the binary to `~/.local/bin`, the desktop file to `~/.local/share/applications`, and icons for the Omarchy app launcher (`Super + Space`):
+
+```bash
+./bin/install
+```
+
+To build a system Arch Linux package:
+
+```bash
+cd pkgbuild && makepkg -fsi
+```
 
 ---
 
-### 🔊 `sound` (Звуки и чиптюн)
-* `enabled` *(true / false)*: Включить или выключить звуки.
-* `volume` *(0.0 - 1.0)*: Уровень громкости.
-* `finish_sound` *(строка)*: 
-  - `""` (пустая строка): использовать встроенный 8-битный победный арпеджио-чиптюн.
-  - Или абсолютный путь к своему `.wav` / `.mp3` / `.ogg` файлу (например `"/home/floper/Music/bell.wav"`).
-* `start_sound` *(строка)*: 
-  - `""`: встроенный 8-битный пинг запуска.
-  - Или путь к кастомному звуку.
-* `click_sound` *(строка)*: 
-  - `""`: встроенный ретро-блип при кликах по кнопкам.
-  - Или путь к кастомному звуку.
+## License
 
----
-
-### 🔔 `notifications` (Уведомления)
-* `true` / `false`: Показывать всплывающее системное уведомление на рабочем столе (`notify-send`) при окончании таймера фокуса или отдыха.
-
----
-
-### ⚙️ `behavior` (Автоматизация)
-* `auto_start_breaks` *(true / false)*: Автоматически запускать таймер отдыха сразу после окончания фокуса (по умолчанию `false`).
-* `auto_start_focus` *(true / false)*: Автоматически начинать следующий фокус после окончания перерыва (по умолчанию `false`).
-
----
-
-### 🎨 `theme` (Интеграция с Omarchy)
-* `use_omarchy_theme` *(true / false)*: Автоматически читать тему из `~/.local/state/omarchy/current/theme/colors.toml` и Hyprland. При смене темы всей системы таймер мгновенно перекрашивается в Gruvbox, Tokyo Night, Catppuccin и т.д.
-* `custom_accent` *(строка, например `"#FF79C6"`)*: Если задан HEX-цвет, он переопределит акцентный цвет интерфейса независимо от системной темы.
-
----
-
-### 🪟 `window` (Окно и отображение)
-* `width` *(число)*: Ширина окна (по умолчанию `360`).
-* `height` *(число)*: Высота окна (по умолчанию `580`).
-* `always_on_top` *(true / false)*: Закрепить поверх всех окон.
-
----
-
-## ⌨️ Горячие клавиши (Keyboard-first)
-
-| Клавиша | Действие |
-|---|---|
-| `Space` | Старт / Пауза |
-| `R` | Сбросить текущий таймер |
-| `S` | Пропустить (перейти к следующему этапу) |
-| `1` | Переключить в режим **Focus** (Фокус) |
-| `2` | Переключить в режим **Short Break** (Короткий отдых) |
-| `3` | Переключить в режим **Long Break** (Длинный отдых) |
-| `M` | Переключить маскота на следующего |
-| `Q` / `Esc` | Закрыть приложение |
+[MIT](LICENSE) © 2026 floper
