@@ -12,7 +12,7 @@
 </p>
 
 <p align="center">
-  <img src="assets/screenshot.png" alt="Pomopixel running live on Omarchy with Gruvbox theme" width="760">
+  <img src="assets/pomopixel-desktop.png" alt="Pomopixel running live on Omarchy with Gruvbox theme" width="760">
 </p>
 
 </div>
