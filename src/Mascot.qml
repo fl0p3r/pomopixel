@@ -36,6 +36,7 @@ Item {
     }
     onPrimaryColorChanged: canvas.requestPaint()
     onSecondaryColorChanged: canvas.requestPaint()
+    onPixelScaleChanged: canvas.requestPaint()
 
     Canvas {
         id: canvas
