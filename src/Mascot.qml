@@ -63,7 +63,9 @@ Item {
 
             var ps = root.pixelScale
 
-            // Dynamic color palette adapting live to theme
+            var isClaude = (m === "claude_critter" || m === "claude")
+            var isTux = (m === "tux")
+
             var pal = {
                 '.': null,
                 'P': root.primaryColor,
@@ -72,14 +74,14 @@ Item {
                 'R': theme.red ? theme.red : "#FF4070",
                 'E': theme.accent ? theme.accent : "#E0D8FF",
                 'W': "#F8F8FF",
-                'K': root.darkEyeColor,
+                'K': isTux ? "#111116" : (isClaude ? "#1A1A24" : root.darkEyeColor),
                 'B': "#20202C",
-                'Y': theme.yellow ? theme.yellow : "#F5A623",
-                'O': Qt.darker(theme.yellow ? theme.yellow : "#F5A623", 1.25),
-                'C': theme.cyan ? theme.cyan : "#89B4FA",
+                'Y': isTux ? "#F5A623" : (theme.yellow ? theme.yellow : "#F5A623"),
+                'O': isTux ? "#D4820A" : Qt.darker(theme.yellow ? theme.yellow : "#F5A623", 1.25),
+                'C': isTux ? "#6a9589" : (theme.cyan ? theme.cyan : "#89B4FA"),
                 'T': "#4A4A5E",
-                'Z': theme.accent ? theme.accent : "#89B4FA",
-                'A': theme.orange ? theme.orange : "#D97757",
+                'Z': isTux ? "#F5A623" : (isClaude ? "#E0D8FF" : (theme.accent ? theme.accent : "#89B4FA")),
+                'A': isClaude ? "#D97757" : (theme.orange ? theme.orange : "#D97757"),
                 'G': theme.blue ? theme.blue : "#8BE9FD"
             }
 
